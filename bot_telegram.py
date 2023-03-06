@@ -1,10 +1,9 @@
 import os
 import logging
 import time
-
 from aiogram import Bot, types, executor, Dispatcher
 
-#TOKEN = '6064787570:AAFvgeGYSAWGGM3eBHn-m5xYZvwQvH1c96c'
+
 TOKEN = os.getenv('TOKEN')
 
 bot = Bot(token=TOKEN)
@@ -15,10 +14,11 @@ async def start(message: types.Message):
     await message.answer('Здравствуйте! Я помогу вам написатьФИО на латинице в соответствии'
                                                  ' с Приказом МИД России от 12.02.2020 № 2113')
     await message.answer('Напишите ФИО на кирилице')
-    logging.basicConfig(level='INFO', filename='my_log.log', format="%(asctime)s %(levelname)s %(message)s")
+    # logging.basicConfig(level='INFO', filename='my_log.log', format="%(asctime)s %(levelname)s %(message)s")
+    logging.basicConfig(level='INFO', format="%(asctime)s %(levelname)s %(message)s")
     logging.info(f'user_id = {message.from_user.id} full_name = {message.from_user.full_name} text = {message.text}')
 
-@dp.message_handler()
+@dp.message_handler()   
 async def translit(message: types.Message):
     translit_dict = {'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D', 'Е': 'E', 'Ё': 'E', 'Ж': 'ZH',
         'З': 'Z', 'И': 'I', 'Й': 'I', 'К': 'K', 'Л': 'L', 'М': 'M', 'Н': 'N', 'О': 'O', 'П': 'P', 'Р': 'R',
